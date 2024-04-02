@@ -8,3 +8,8 @@ number | word | meaning | example
 02 | Performance| Load balancers can forward requests to servers with a lesser load so the user can get a quicker response time. This not only improves performance but also improves resource utilization.
 03 | DNS as a LB | DNS can be considered a global server load balancer (GSLB).
 04 | lb algorithms | RR, weight-RR, least connections, least response time, least bandwidth, least packets, source IP hash, URL hash, custom hash, and random.
+10 | Atomicity | It’s either all or nothing |
+11 | Consistency | This concerns the correctness of the data. |
+12 | Isolation | The database should be able to process concurrent transactions without leading to inconsistency. |
+13 | Durability | Once a transaction has been completed the changes are permanently written to disk and won’t be lost in case of a system failure. |
+

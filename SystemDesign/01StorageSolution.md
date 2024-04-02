@@ -46,11 +46,20 @@ Structure is one of the factors we use to identify what type of database we need
 
 - Durability means that once a transaction has been completed the changes are permanently written to disk and won’t be lost in case of a system failure.
 
+name | meaning | example
+--- | --- | ---
+Atomicity | It’s either all or nothing |
+Consistency | This concerns the correctness of the data. |
+Isolation | The database should be able to process concurrent transactions without leading to inconsistency. |
+Durability | Once a transaction has been completed the changes are permanently written to disk and won’t be lost in case of a system failure. |
+
 Suppose you are trying to build a catalog for something like Amazon, where you want to store information about different products that have various attributes. These attributes will normally not be the same for different products, eg. medicines will have an expiry date but refrigerators will have energy ratings. In such a case our data cannot be represented as a table. This means we need to use a NoSQL database.
 
 Also, we don’t just need to store this data but also query on this data. Here comes the factor of Query pattern. Which type of database we use here will be decided based on what type of data we store and what types of queries will be run on it. If we have vast data - not just volume but also a vast variety of attributes- and we need to run a vast variety of queries, we need to use something called a Document DB.  MongoDB are some commonly used document databases.
 
 Elasticsearch and Solr are special cases of document DBs.
+
+Cassandra is by default an AP (Available Partition-tolerant) database, hence it is “always on”. But you can indeed configure the consistency on a per-query basis. In this context, the consistency level represents the minimum number of Cassandra nodes that must acknowledge a read or write operation to the coordinator before the operation is considered successful. As a general rule, you will select your consistency level (CL) based on your replication factor. 
 
 But what if you don’t have a vast variety of attributes i.e. very limited variety of queries but the size of the database increases very rapidly? Eg. data collected by Uber for their drivers’ location pings. Now the number of Uber drivers will keep increasing day by data i.e. data collected every day will also keep increasing day by day. This becomes an ever-increasing data. In such cases, we use Columnar DBs like Cassandra or HBase. There are some other alternatives as well but these are the most widely used, tested, and stable ones. Cassandra  is commonly used, as it is lighter to deploy whereas for HBase. HBase is being built on top of Hadoop, we need to first set up Hadoop and then setup HBase on top of it. This makes the setup of HBase a little lengthy, but performance-wise both are pretty much the same. Basically the idea is that if you have a huge scale of queries but less variety in queries, and most of your queries are such that you can include a common partition key in the where clause for each of the queries, then Cassandra works beautifully!
 
